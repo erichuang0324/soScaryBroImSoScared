@@ -1,24 +1,66 @@
+<meta charset="utf-8">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<section class="alert-hero">
+    <div class="alert-badge">SYSTEM ALERT</div>
+
+    <h1 class="alert-title">
+        <span>Your PC has been</span>
+        <span class="alert-hacked">HACKED</span>
+    </h1>
+
+    <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+            ▲ НАРУШЕНИЕ БЕЗОПАСНОСТИ ▲ КРАЖА ДАННЫХ ▲ ОБХОД БРЭМЭЙМЭРА ▲
+            НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП ▲ ШИФРОВАНИЕ АКТИВНО ▲ НАРУШЕНИЕ БЕЗОПАСНОСТИ ▲ КРАЖА ДАННЫХ ▲ ОБХОД БРЭМЭЙМЭРА ▲
+            НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП ▲ ШИФРОВАНИЕ АКТИВНО ▲
+        </div>
+    </div>
+</section>
 <div class="glitch-wrapper">
-    <div class="glitch" data-glitch="Win Stuco or Lose Your computer">Win Stuco or Lose Your computer</div>
+    <!-- You can omit data-glitch now; the script fills it automatically -->
+    <div class="glitch">Win Stuco or Lose Your computer</div>
+
+    <!-- Works on any element, like a button -->
+    <button class="glitch btn-neon" style="--accent:#00ffff">ACCEPT</button>
 </div>
 
 <style>
     body{
+        background: #000;
         margin: 0;
         padding: 0;
+        overflow-x: hidden;
+        color: #fff;
     }
+    .btn-neon.glitch { font-size: clamp(16px, 2.2vw, 26px); }
     .glitch-wrapper {
+        font-family: "VT323", system-ui;
+        font-weight: 1;
+        padding-top: 130vh;       /* keeps “scroll to see” behavior */
         width: 100%;
-        height: 100%;
-        display: flex;
+        min-height: 100%;
+        display: flex;            /* so align/justify actually work */
+        flex-direction: column;   /* stack items vertically */
         align-items: center;
         justify-content: center;
         text-align: center;
         background-color: #000000;
+        gap: 16px;                /* small space between items */
     }
 
+    /* === Your original glitch effect, now reusable on any element === */
     .glitch {
         position: relative;
+        display: inline-block;    /* makes it safe for buttons/spans */
         font-size: 88px;
         font-weight: 700;
         line-height: 1.2;
@@ -28,7 +70,7 @@
         z-index: 1;
     }
 
-    .glitch:before {
+    .glitch::before {
         content: attr(data-glitch);
         position: absolute;
         top: 0;
@@ -42,11 +84,11 @@
         animation: noise-before 3s infinite linear alternate-reverse;
     }
 
-    .glitch:after {
+    .glitch::after {
         content: attr(data-glitch);
         position: absolute;
         top: 0;
-        left: 2px;
+        left:  2px;
         text-shadow: 1px 0 #ff01ff;
         width: 100%;
         color: #ff0000;
@@ -57,208 +99,277 @@
     }
 
     @keyframes noise-before {
-        0% {
-            clip: rect(61px, 9999px, 52px, 0);
-        }
-
-        5% {
-            clip: rect(33px, 9999px, 144px, 0);
-        }
-
-        10% {
-            clip: rect(121px, 9999px, 115px, 0);
-        }
-
-        15% {
-            clip: rect(144px, 9999px, 162px, 0);
-        }
-
-        20% {
-            clip: rect(62px, 9999px, 180px, 0);
-        }
-
-        25% {
-            clip: rect(34px, 9999px, 42px, 0);
-        }
-
-        30% {
-            clip: rect(147px, 9999px, 179px, 0);
-        }
-
-        35% {
-            clip: rect(99px, 9999px, 63px, 0);
-        }
-
-        40% {
-            clip: rect(188px, 9999px, 122px, 0);
-        }
-
-        45% {
-            clip: rect(154px, 9999px, 14px, 0);
-        }
-
-        50% {
-            clip: rect(63px, 9999px, 37px, 0);
-        }
-
-        55% {
-            clip: rect(161px, 9999px, 147px, 0);
-        }
-
-        60% {
-            clip: rect(109px, 9999px, 175px, 0);
-        }
-
-        65% {
-            clip: rect(157px, 9999px, 88px, 0);
-        }
-
-        70% {
-            clip: rect(173px, 9999px, 131px, 0);
-        }
-
-        75% {
-            clip: rect(62px, 9999px, 70px, 0);
-        }
-
-        80% {
-            clip: rect(24px, 9999px, 153px, 0);
-        }
-
-        85% {
-            clip: rect(138px, 9999px, 40px, 0);
-        }
-
-        90% {
-            clip: rect(79px, 9999px, 136px, 0);
-        }
-
-        95% {
-            clip: rect(25px, 9999px, 34px, 0);
-        }
-
-        100% {
-            clip: rect(173px, 9999px, 166px, 0);
-        }
+        0% { clip: rect(61px, 9999px, 52px, 0); }
+        5% { clip: rect(33px, 9999px, 144px, 0); }
+        10% { clip: rect(121px, 9999px, 115px, 0); }
+        15% { clip: rect(144px, 9999px, 162px, 0); }
+        20% { clip: rect(62px, 9999px, 180px, 0); }
+        25% { clip: rect(34px, 9999px, 42px, 0); }
+        30% { clip: rect(147px, 9999px, 179px, 0); }
+        35% { clip: rect(99px, 9999px, 63px, 0); }
+        40% { clip: rect(188px, 9999px, 122px, 0); }
+        45% { clip: rect(154px, 9999px, 14px, 0); }
+        50% { clip: rect(63px, 9999px, 37px, 0); }
+        55% { clip: rect(161px, 9999px, 147px, 0); }
+        60% { clip: rect(109px, 9999px, 175px, 0); }
+        65% { clip: rect(157px, 9999px, 88px, 0); }
+        70% { clip: rect(173px, 9999px, 131px, 0); }
+        75% { clip: rect(62px, 9999px, 70px, 0); }
+        80% { clip: rect(24px, 9999px, 153px, 0); }
+        85% { clip: rect(138px, 9999px, 40px, 0); }
+        90% { clip: rect(79px, 9999px, 136px, 0); }
+        95% { clip: rect(25px, 9999px, 34px, 0); }
+        100%{ clip: rect(173px, 9999px, 166px, 0); }
     }
 
     @keyframes noise-after {
-        0% {
-            clip: rect(26px, 9999px, 33px, 0);
-        }
-
-        5% {
-            clip: rect(140px, 9999px, 198px, 0);
-        }
-
-        10% {
-            clip: rect(184px, 9999px, 89px, 0);
-        }
-
-        15% {
-            clip: rect(121px, 9999px, 6px, 0);
-        }
-
-        20% {
-            clip: rect(181px, 9999px, 99px, 0);
-        }
-
-        25% {
-            clip: rect(154px, 9999px, 133px, 0);
-        }
-
-        30% {
-            clip: rect(134px, 9999px, 169px, 0);
-        }
-
-        35% {
-            clip: rect(26px, 9999px, 187px, 0);
-        }
-
-        40% {
-            clip: rect(147px, 9999px, 137px, 0);
-        }
-
-        45% {
-            clip: rect(31px, 9999px, 52px, 0);
-        }
-
-        50% {
-            clip: rect(191px, 9999px, 109px, 0);
-        }
-
-        55% {
-            clip: rect(74px, 9999px, 54px, 0);
-        }
-
-        60% {
-            clip: rect(145px, 9999px, 75px, 0);
-        }
-
-        65% {
-            clip: rect(153px, 9999px, 198px, 0);
-        }
-
-        70% {
-            clip: rect(99px, 9999px, 136px, 0);
-        }
-
-        75% {
-            clip: rect(118px, 9999px, 192px, 0);
-        }
-
-        80% {
-            clip: rect(1px, 9999px, 83px, 0);
-        }
-
-        85% {
-            clip: rect(145px, 9999px, 98px, 0);
-        }
-
-        90% {
-            clip: rect(121px, 9999px, 154px, 0);
-        }
-
-        95% {
-            clip: rect(156px, 9999px, 44px, 0);
-        }
-
-        100% {
-            clip: rect(67px, 9999px, 122px, 0);
-        }
+        0% { clip: rect(26px, 9999px, 33px, 0); }
+        5% { clip: rect(140px, 9999px, 198px, 0); }
+        10% { clip: rect(184px, 9999px, 89px, 0); }
+        15% { clip: rect(121px, 9999px, 6px, 0); }
+        20% { clip: rect(181px, 9999px, 99px, 0); }
+        25% { clip: rect(154px, 9999px, 133px, 0); }
+        30% { clip: rect(134px, 9999px, 169px, 0); }
+        35% { clip: rect(26px, 9999px, 187px, 0); }
+        40% { clip: rect(147px, 9999px, 137px, 0); }
+        45% { clip: rect(31px, 9999px, 52px, 0); }
+        50% { clip: rect(191px, 9999px, 109px, 0); }
+        55% { clip: rect(74px, 9999px, 54px, 0); }
+        60% { clip: rect(145px, 9999px, 75px, 0); }
+        65% { clip: rect(153px, 9999px, 198px, 0); }
+        70% { clip: rect(99px, 9999px, 136px, 0); }
+        75% { clip: rect(118px, 9999px, 192px, 0); }
+        80% { clip: rect(1px, 9999px, 83px, 0); }
+        85% { clip: rect(145px, 9999px, 98px, 0); }
+        90% { clip: rect(121px, 9999px, 154px, 0); }
+        95% { clip: rect(156px, 9999px, 44px, 0); }
+        100%{ clip: rect(67px, 9999px, 122px, 0); }
     }
 
     @keyframes shift {
-        0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% {
-            transform: skewX(0deg);
-        }
-
-        41% {
-            transform: skewX(10deg);
-        }
-
-        42% {
-            transform: skewX(-10deg);
-        }
-
-        59% {
-            transform: skewX(40deg) skewY(10deg);
-        }
-
-        60% {
-            transform: skewX(-40deg) skewY(-10deg);
-        }
-
-        63% {
-            transform: skewX(10deg) skewY(-5deg);
-        }
-
-        70% {
-            transform: skewX(-50deg) skewY(-20deg);
-        }
-
-        71% {
-            transform: skewX(10deg) skewY(-10deg);
-        }
+        0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% { transform: skewX(0deg); }
+        41% { transform: skewX(10deg); }
+        42% { transform: skewX(-10deg); }
+        59% { transform: skewX(40deg)  skewY(10deg); }
+        60% { transform: skewX(-40deg) skewY(-10deg); }
+        63% { transform: skewX(10deg)  skewY(-5deg); }
+        70% { transform: skewX(-50deg) skewY(-20deg); }
+        71% { transform: skewX(10deg)  skewY(-10deg); }
     }
+    /* Optional: let glitch slices show the button's background instead of black */
+    .glitch::before,
+    .glitch::after { background-color: transparent; }
+
+    /* Stylish neon button */
+    .btn-neon {
+        /* Theme knobs (tweak per button if you want) */
+        --accent: #ff0033;          /* main glow color */
+        --bg1: #121212;
+        --bg2: #0a0a0a;
+        --text: #ffffff;
+
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 14px 28px;
+        border-radius: 14px;
+        border: 1px solid color-mix(in oklab, var(--accent) 45%, transparent);
+        background: linear-gradient(180deg, var(--bg1), var(--bg2));
+        color: var(--text);
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        cursor: pointer;
+        user-select: none;
+
+        /* Glow + depth */
+        box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.06),
+                0 10px 24px rgba(255, 0, 51, .18),
+                0 0 18px rgba(255, 0, 51, .35);
+        transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    /* Keep button text reasonably sized even with .glitch defaults */
+    .btn-neon.glitch {
+        font-size: clamp(14px, 1.8vw, 22px);
+        letter-spacing: .14em;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    /* Hover: brighter glow + slight lift */
+    .btn-neon:hover {
+        border-color: color-mix(in oklab, var(--accent) 70%, transparent);
+        box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.1),
+                0 14px 30px rgba(255, 0, 51, .25),
+                0 0 26px rgba(255, 0, 51, .55);
+        transform: translateY(-1px);
+    }
+
+    /* Active (pressed): subtle sink */
+    .btn-neon:active {
+        transform: translateY(0);
+        box-shadow:
+                inset 0 2px 6px rgba(0,0,0,.35),
+                0 8px 18px rgba(255, 0, 51, .18),
+                0 0 16px rgba(255, 0, 51, .4);
+    }
+
+    /* Accessible focus ring */
+    .btn-neon:focus-visible {
+        outline: none;
+        box-shadow:
+                0 0 0 2px color-mix(in oklab, var(--accent) 70%, transparent),
+                0 0 0 6px color-mix(in oklab, var(--accent) 28%, transparent),
+                0 14px 30px rgba(255, 0, 51, .22),
+                0 0 26px rgba(255, 0, 51, .5);
+    }
+
+    /* Optional color themes – set inline via style="--accent:#00ffff" etc. */
+    .btn-neon.is-cyan   { --accent:#00ffff; }
+    .btn-neon.is-magenta{ --accent:#ff01ff; }
+    .btn-neon.is-green  { --accent:#00ff85; }
+    .alert-hero{
+        position: relative;
+        min-height: 100vh;                 /* full screen hero */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: min(3vh, 24px);
+        padding: 6vh 4vw;
+        text-align: center;
+        /* layered backdrop */
+        background:
+                radial-gradient(120% 180% at 50% -20%, rgba(255,0,80,.18), transparent 60%),
+                radial-gradient(120% 180% at 50% 120%, rgba(0,255,255,.12), transparent 60%),
+                #000;
+    }
+    /* subtle scanlines overlay */
+    .alert-hero::after{
+        content:"";
+        position:absolute; inset:0; pointer-events:none;
+        background: repeating-linear-gradient(
+                to bottom,
+                rgba(255,255,255,.045), rgba(255,255,255,.045) 1px,
+                transparent 1px, transparent 3px
+        );
+        mix-blend-mode: overlay;
+    }
+
+    .alert-badge{
+        font: 800 12px/1.1 system-ui, sans-serif;
+        letter-spacing:.32em;
+        text-transform: uppercase;
+        padding: 10px 14px;
+        border-radius: 9999px;
+        border: 1px solid rgba(255,0,80,.6);
+        background: rgba(255,0,80,.08);
+        box-shadow:
+                inset 0 0 20px rgba(255,0,80,.25),
+                0 0 22px rgba(255,0,80,.2);
+    }
+
+    .alert-title{
+
+        font-style: normal;
+        margin: 0;
+        font-weight: 900;
+        line-height: .95;
+        letter-spacing: .02em;
+        font-size: clamp(36px, 7vw, 96px);
+    }
+    .alert-title span{ display:block; }
+
+    .alert-hacked{
+        text-transform: uppercase;
+        /* animated gradient fill */
+        background: linear-gradient(90deg,#ff1e56,#ffcf00,#00ffa3,#00c2ff,#ff1e56);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 12px rgba(255,0,100,.35));
+        animation: hue-shift 6s linear infinite;
+    }
+    @keyframes hue-shift { from{background-position:0% 50%} to{background-position:100% 50%} }
+
+    .ticker{
+        position: relative;
+        overflow: hidden;
+        width: min(900px, 88vw);
+        border-top: 1px solid rgba(255,0,80,.35);
+        border-bottom: 1px solid rgba(0,255,255,.25);
+        mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    }
+    .ticker__track{
+        display: inline-block;
+        white-space: nowrap;
+        padding-block: 10px;
+        font-family: "DotGothic16";
+        font: 700 14px/1.4 DotGothic16, sans-serif;
+        letter-spacing: .25em;
+        text-transform: uppercase;
+        color: #e5e5e5;
+        text-shadow: 0 0 6px rgba(0,255,255,.3);
+        animation: marquee 18s linear infinite;
+    }
+    @keyframes marquee{
+        from{ transform: translateX(0); }
+        to  { transform: translateX(-50%); } /* text is duplicated in content */
+    }
+
+    /* ---------- BOTTOM SECTION TWEAK ---------- */
+    .glitch-wrapper {
+        /* You had 130vh padding; now top hero already fills the first screen.
+           Keep a smaller offset so content still appears after a scroll. */
+        padding-top: 30vh;               /* adjust to taste (20–60vh) */
+        width: 100%;
+        min-height: 100%;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        text-align: center;
+        gap: 16px;
+        background:#000;
+    }
+
+    /* Make button from earlier look nice with the hero */
+    .btn-neon{
+        --accent:#ff0033; --bg1:#121212; --bg2:#0a0a0a; --text:#fff;
+        position:relative; display:inline-flex; align-items:center; justify-content:center;
+        padding:14px 28px; border-radius:14px; border:1px solid rgba(255,0,51,.45);
+        background: linear-gradient(180deg,var(--bg1),var(--bg2)); color:var(--text);
+        text-transform: uppercase; letter-spacing:.14em; cursor:pointer; user-select:none;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 10px 24px rgba(255,0,51,.18), 0 0 18px rgba(255,0,51,.35);
+        transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .btn-neon.glitch { font-size: clamp(14px, 1.8vw, 22px); font-weight:800; line-height:1.2; }
+    .btn-neon:hover  { border-color: rgba(255,0,51,.7); transform: translateY(-1px);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 30px rgba(255,0,51,.25), 0 0 26px rgba(255,0,51,.55); }
+
+    /* Let your existing glitch slices show through */
+    .glitch::before, .glitch::after { background-color: transparent; }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+        .alert-hacked, .ticker__track { animation: none !important; }
+    }
+    .rubik-glitch-regular {
+        font-family: "Rubik Glitch", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
+
 </style>
+
+<script>
+    // Auto-fill data-glitch so you don’t have to duplicate text manually
+    document.querySelectorAll('.glitch').forEach(el => {
+        if (!el.hasAttribute('data-glitch')) {
+            el.setAttribute('data-glitch', el.textContent.trim());
+        }
+    });
+</script>
