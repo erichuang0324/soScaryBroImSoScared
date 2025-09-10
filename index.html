@@ -7,21 +7,22 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=JetBrains+Mono:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 </head>
 <section class="alert-hero">
+    <audio id="audioPlay" src="music/nahhMan.mp3"></audio>
     <div class="alert-badge">SYSTEM ALERT</div>
 
     <h1 class="alert-title">
-        <span>Your PC has been</span>
-        <span class="alert-hacked">HACKED</span>
+        <span class="lang-flash" data-ru="Ваш ПК был">Your PC has been</span>
+        <span class="alert-hacked lang-flash" data-ru="ВЗЛОМАН">HACKED</span>
     </h1>
 
     <div class="ticker" aria-hidden="true">
         <div class="ticker__track">
-            ▲ НАРУШЕНИЕ БЕЗОПАСНОСТИ ▲ КРАЖА ДАННЫХ ▲ ОБХОД БРЭМЭЙМЭРА ▲
-            НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП ▲ ШИФРОВАНИЕ АКТИВНО ▲ НАРУШЕНИЕ БЕЗОПАСНОСТИ ▲ КРАЖА ДАННЫХ ▲ ОБХОД БРЭМЭЙМЭРА ▲
-            НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП ▲ ШИФРОВАНИЕ АКТИВНО ▲
+            ▲ НАРУШЕНИЕ БЕЗОПАСНОСТИ ▲ КРАЖА ДАННЫХ ▲ ОБХОД БРАНДМАУЭРА ▲
+            НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП ▲ ШИФРОВАНИЕ АКТИВНО ▲ …
         </div>
     </div>
 </section>
@@ -30,10 +31,79 @@
     <div class="glitch">Win Stuco or Lose Your computer</div>
 
     <!-- Works on any element, like a button -->
-    <button class="glitch btn-neon" style="--accent:#00ffff">ACCEPT</button>
+    <button class="glitch btn-neon" style="--accent:#00ffff" onclick="playAudio()",document.body.style.backgroundColor='green' >ACCEPT THE OFFER</button>
 </div>
 
 <style>
+    /* Language flash: overlay a Russian clone on top of the original text */
+    .lang-flash { position: relative; }
+
+    /* The Russian overlay element injected by JS */
+    .lang-flash .ru-flash {
+        position: absolute; inset: 0;
+        pointer-events: none;
+        opacity: 0;
+        /* default mono look; inherits size/weight from parent */
+        color: #00fff0;
+        text-shadow:
+                0 0 6px rgba(0,255,255,.55),
+                0 0 18px rgba(0,255,255,.35);
+        mix-blend-mode: screen;
+        transform: translateZ(0);
+        animation: ru-flicker 12s steps(1, end) infinite;
+        animation-delay: var(--ru-delay, 0s);
+    }
+
+    /* Make Russian overlay match your gradient headline when inside .alert-hacked */
+    .alert-hacked .ru-flash {
+        font-family: "Russo One", system-ui, sans-serif;
+        text-transform: uppercase;
+        background: linear-gradient(90deg,#ff1e56,#ffcf00,#00ffa3,#00c2ff,#ff1e56);
+        background-size: 300% 100%;
+        -webkit-background-clip: text; background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 12px rgba(255,0,100,.35));
+        animation:
+                ru-flicker 12s steps(1,end) infinite,
+                hue-shift 6s linear infinite; /* reuse your existing hue animation */
+        animation-delay: var(--ru-delay, 0s), 0s;
+    }
+
+    /* Optional: give the Russian flash a tiny RGB split for extra glitch */
+    .lang-flash .ru-flash::before,
+    .lang-flash .ru-flash::after {
+        content: attr(data-text);
+        position: absolute; inset: 0;
+        pointer-events: none;
+        opacity: inherit;
+    }
+    .lang-flash .ru-flash::before { left: -1px; text-shadow: -1px 0 #00ffff; }
+    .lang-flash .ru-flash::after  { left:  1px; text-shadow:  1px 0 #ff00ff; }
+
+    /* Flicker schedule: mostly invisible; short, irregular Russian bursts */
+    @keyframes ru-flicker {
+        0%, 5.9%   { opacity: 0; transform: none; }
+        6%, 6.6%   { opacity: 1; transform: skewX(-6deg) translateX(-1px); }
+        6.7%, 19.9%{ opacity: 0; transform: none; }
+
+        20%, 20.5% { opacity: 1; transform: translateX(1px) skewY(2deg); }
+        20.6%, 39.9%{ opacity: 0; }
+
+        40%, 41%   { opacity: 1; transform: skewX(4deg); }
+        41.1%, 59.9%{ opacity: 0; }
+
+        60%, 61%   { opacity: 1; transform: translateX(-1px); }
+        61.1%, 81.9%{ opacity: 0; }
+
+        82%, 83%   { opacity: 1; transform: skewX(-3deg) translateX(1px); }
+        83.1%, 94.9%{ opacity: 0; }
+
+        95%, 96%   { opacity: 1; transform: none; }
+        96.1%,100% { opacity: 0; }
+    }
+
+    .alert-title, .alert-hacked { font-family: "Russo One", system-ui, sans-serif; }
+    body, .glitch, .btn-neon    { font-family: "JetBrains Mono", "IBM Plex Mono", monospace; }
     body{
         background: #000;
         margin: 0;
@@ -366,10 +436,39 @@
 </style>
 
 <script>
+    // JavaScript to control audio
+    const audio = document.getElementById('audioPlay');
+    function greenScreen(){
+                         // remove everything
+    }
+    function playAudio() {
+        audio.play();
+        document.body.style.backgroundColor = "green";  // turn screen green
+        document.body.innerHTML = "";
+    }
+
+    function pauseAudio() {
+        audio.pause();
+    }
     // Auto-fill data-glitch so you don’t have to duplicate text manually
     document.querySelectorAll('.glitch').forEach(el => {
         if (!el.hasAttribute('data-glitch')) {
             el.setAttribute('data-glitch', el.textContent.trim());
         }
     });
+    // Keep your existing .glitch data fill
+    document.querySelectorAll('.glitch').forEach(el => {
+        if (!el.hasAttribute('data-glitch')) {
+            el.setAttribute('data-glitch', el.textContent.trim());
+        }
+    });
+
+    // Randomize background flash start times so the strobe isn't synchronized
+    const hero = document.querySelector('.alert-hero');
+    if (hero) hero.style.setProperty('--flash-delay', (Math.random() * 6).toFixed(2) + 's');
+
+    document.documentElement.style.setProperty(
+        '--page-flash-delay',
+        (Math.random() * 8).toFixed(2) + 's'
+    );
 </script>
